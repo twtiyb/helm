@@ -14,8 +14,9 @@ fullnameOverride: ""
 
 service:
   type: ClusterIP
-  ports: 
+  ports:
     - 7788
+    - 7789
   
 env:
   COMP: messagedispatch-biz
