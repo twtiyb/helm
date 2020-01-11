@@ -44,8 +44,8 @@ spec:
       readOnly: false
     workingDir: "/home/jenkins/agent"
   hostNetwork: false
-  nodeSelector:
-    jenkins_slave: "true"
+#  nodeSelector:
+#    jenkins_slave: "true"
   restartPolicy: "Never"
   securityContext: {}
   serviceAccount: "jenkins-admin"
