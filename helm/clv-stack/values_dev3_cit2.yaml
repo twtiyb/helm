@@ -20,6 +20,13 @@ gateway-web:
     enabled: false 
 
 
+# 汽车行业
+carstore-biz:
+  enabled: true
+  image: 
+      repository:  192.168.6.11/clv/carstore-biz
+      tag: dev3-latest
+
 # 行业
 commonindustry-biz:
   enabled: true
