@@ -1,0 +1,64 @@
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations: {}
+  labels:
+    jenkins: "slave"
+    jenkins/jenkins-jnlp: "true"
+  name: "jnlp-wpzfb"
+spec:
+  containers:
+  - env:
+    - name: "JENKINS_SECRET"
+      value: "a0a11aea36000e197cdca95852ec7555a8e29d3dcb2c1b48bb3d6d09f7d266f6"
+    - name: "JENKINS_AGENT_NAME"
+      value: "jnlp-wpzfb"
+    - name: "JENKINS_NAME"
+      value: "jnlp-wpzfb"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenkins-web-ui.wckj-ops.svc.cluster.local/"
+    image: "192.168.6.11/base/jenkins-slave-os:v3.1"
+    imagePullPolicy: "IfNotPresent"
+    name: "jnlp"
+    resources:
+      limits: {}
+      requests: {}
+    securityContext:
+      privileged: true
+    tty: true
+    volumeMounts:
+    - mountPath: "/target"
+      name: "volume-2"
+      readOnly: false
+    - mountPath: "/root/.m2"
+      name: "volume-1"
+      readOnly: false
+    - mountPath: "/var/run/docker.sock"
+      name: "volume-0"
+      readOnly: false
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  hostNetwork: false
+  nodeSelector:
+    jenkins_slave: "true"
+  restartPolicy: "Never"
+  securityContext: {}
+  serviceAccount: "jenkins-admin"
+  volumes:
+  - hostPath:
+      path: "/var/run/docker.sock"
+    name: "volume-0"
+  - hostPath:
+      path: "/target"
+    name: "volume-2"
+  - hostPath:
+      path: "/root/.m2"
+    name: "volume-1"
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
