@@ -17,7 +17,7 @@ service:
   ports:
     - 7788
     - 7789
-  
+
 env:
   COMP: messagedispatch-biz
   SERVER_PORT: 7788
