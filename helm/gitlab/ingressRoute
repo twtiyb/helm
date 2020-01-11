@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gitlab-ingressroutebar
+  namespace: wckj-ops
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`gitlab.clvpg.com`)
+    kind: Rule
+    services:
+    - name: gitlab-gitlab-core
+      port: 80

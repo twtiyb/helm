@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: redis-cit3-route
+spec:
+  entryPoints:
+    - web-secret
+  routes:
+  - match: HostSNI(`redis.cit3.scm.clvpg.com`)
+    kind: Rule
+    services:
+    - name: redis-headless
+      port: 6379
+  tls:
+    secretName: tls
