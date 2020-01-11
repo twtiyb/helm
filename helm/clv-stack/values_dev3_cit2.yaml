@@ -1,173 +1,173 @@
 global:
-  env: 
+  env:
     JAVA_MEM_SIZE: -Xmx768m
     # 不启动pinpoint
     # PINPOINT_COL_IP: 192.168.4.7 
     LOGSTASH_ADDRESS: "\"192.168.6.32:5044\", \"192.168.6.33:5044\", \"192.168.6.34:5044\""
     # 连接的环境，普通的是以dev,cit,uat等来标识。也可以自己定义如t2，一般是特殊情况新建的环境。
-    ENV: cit2 
+    ENV: cit2
     CONFIG_URL: 172.16.4.177:8091
   root_domain: scm.clvpg.com
 
 # 网关
 gateway-web:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/gateway-web
-      # 代码的版本，一般以v1 .4.4-build_number 方式来标识。
-      tag: dev3-latest
-  ingress: 
-    enabled: false 
+  image:
+    repository:  192.168.6.11/clv/gateway-web
+    # 代码的版本，一般以v1 .4.4-build_number 方式来标识。
+    tag: dev3-latest
+  ingress:
+    enabled: false
 
 # 汽车行业
 carstore-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/carstore-biz
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/carstore-biz
+    tag: dev3-latest
 
 # 行业
 commonindustry-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/commonindustry-biz
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/commonindustry-biz
+    tag: dev3-latest
 
 # 用户
 usercenter-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/usercenter-biz
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/usercenter-biz
+    tag: dev3-latest
 
 
 # 资源
 resourcecenter-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/resourcecenter-biz
-      tag: dev3-latest
- 
+  image:
+    repository:  192.168.6.11/clv/resourcecenter-biz
+    tag: dev3-latest
+
 # 契约
 contractcenter-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/contractcenter-biz
-      tag: dev3-latest
- 
+  image:
+    repository:  192.168.6.11/clv/contractcenter-biz
+    tag: dev3-latest
+
 
 # 外部接口
 datasync-web:
   enabled: true
-  image: 
+  image:
     repository:  192.168.6.11/clv/datasync-web
     tag: dev3-latest
 
 # 外部接口
 datasync-biz:
   enabled: true
-  image: 
+  image:
     repository:  192.168.6.11/clv/datasync-biz
     tag: dev3-latest
- 
+
 
 # 财务
 accountingcenter-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/accountingcenter-biz
-      tag: dev3-latest
- 
+  image:
+    repository:  192.168.6.11/clv/accountingcenter-biz
+    tag: dev3-latest
+
 
 # 任务
 taskcenter-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/taskcenter-biz
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/taskcenter-biz
+    tag: dev3-latest
 
 # 中台
 gw-midstage-web:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/gw-midstage-midstage-web
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/gw-midstage-midstage-web
+    tag: dev3-latest
 
 # 中台
 gw-midstage-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/gw-midstage-midstage-biz
-      tag: dev3-latest
-      
+  image:
+    repository:  192.168.6.11/clv/gw-midstage-midstage-biz
+    tag: dev3-latest
+
 # 标准接口
 openapi-web:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/openapi-web
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/openapi-web
+    tag: dev3-latest
 
 openapi-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/openapi-biz
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/openapi-biz
+    tag: dev3-latest
 
 # 极光推送
 push-jar:
   enabled: false
-  image: 
-      repository:  192.168.6.11/clv/push-jar
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/push-jar
+    tag: dev3-latest
 
 # 长连接
 messagedispatch-biz:
   enabled: false
-  image: 
-      repository:  192.168.6.11/clv/messagedispatch-biz
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/messagedispatch-biz
+    tag: dev3-latest
 
 # 长连接
 channelcenter-biz:
   enabled: false
-  image: 
-      repository:  192.168.6.11/clv/channelcenter-biz
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/channelcenter-biz
+    tag: dev3-latest
 
 # 规则中心
 rulecenter-web:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/rulecenter-web
-      tag: dev3-latest
+  image:
+    repository:  192.168.6.11/clv/rulecenter-web
+    tag: dev3-latest
 
 # 规则中心
 rulecenter-biz:
   enabled: true
-  image: 
-      repository:  192.168.6.11/clv/rulecenter-biz
-      tag: dev3-latest
- 
+  image:
+    repository:  192.168.6.11/clv/rulecenter-biz
+    tag: dev3-latest
+
 # 搜索中心
 searchcenter-biz:
   enabled: false
-  image: 
-      repository:  192.168.6.11/clv/searchcenter-biz
-      tag: dev3-latest
- 
- 
+  image:
+    repository:  192.168.6.11/clv/searchcenter-biz
+    tag: dev3-latest
+
+
 # bi
 supplychainbi-biz:
   enabled: false
-  image: 
-      repository:  192.168.6.11/clv/supplychainbi-biz
-      tag: dev3-latest
- 
- 
+  image:
+    repository:  192.168.6.11/clv/supplychainbi-biz
+    tag: dev3-latest
+
+
 # 目标
 targetcenter-biz:
   enabled: false
-  image: 
+  image:
     repository:  192.168.6.11/clv/targetcenter-biz
     tag: dev3-latest
 
