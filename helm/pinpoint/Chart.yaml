@@ -1,0 +1,10 @@
+name: pinpoint
+description: This chart for pinpoint
+version: 0.0.1
+keywords:
+  - pinpoint
+  - pinpoint web
+  - pinpoint hbse
+  - pinpoint collector
+sources:
+home:

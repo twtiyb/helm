@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: "6"
+description: A Helm chart for ELK
+home: https://www.elastic.co/products
+icon: https://www.elastic.co/assets/bltb35193323e8f1770/logo-elastic-stack-lt.svg
+maintainers:
+- email: twtiyb@gmail.com
+  name: twtiyb 
+version: 1.0.0
+name: clv-stack

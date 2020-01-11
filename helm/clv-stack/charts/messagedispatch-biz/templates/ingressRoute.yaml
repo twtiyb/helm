@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "messagedispatch-biz.fullname" . }}-ingressroutebar
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: HostSNI(`*`)
+    kind: Rule
+    services:
+    - name: {{ include "messagedispatch-biz.fullname" . }}-service
+      port: {{ .Values.service.port }}

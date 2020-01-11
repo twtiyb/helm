@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "web.fullname" . }}-ingressroutebar
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`{{ .Release.Name }}.{{  .Values.global.root_domain }}`)
+    kind: Rule
+    services:
+    - name: {{ include "web.fullname" . }}-service
+      port: {{ .Values.service.port }}

@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "webweex.fullname" . }}-ingressroutebar
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`{{ .Release.Name }}.{{  .Values.global.root_domain }}`) && PathPrefix(`/webweex/`)
+    kind: Rule
+    services:
+    - name: {{ include "webweex.fullname" . }}-service
+      port: {{ .Values.service.port }}
+    middlewares:
+    - name: {{ include "webweex.fullname" . }}-middleware
