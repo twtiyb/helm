@@ -15,12 +15,12 @@ fullnameOverride: ""
 service:
   type: ClusterIP
   ports: 
-    - 20886
-    - 9096
+    - 20897
+    - 9107
 
 env:
   COMP: carstore-biz
-  SERVER_PORT: 20886
+  SERVER_PORT: 20897
 
 ingress:
   enabled: false
