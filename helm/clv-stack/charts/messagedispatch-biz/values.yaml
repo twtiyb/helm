@@ -16,7 +16,7 @@ service:
   type: ClusterIP
   ports:
     - 7788
-    - 7789
+    - 20911
 
 env:
   COMP: messagedispatch-biz
