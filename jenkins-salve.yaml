@@ -11,7 +11,7 @@ spec:
   containers:
   - env:
     - name: "JENKINS_SECRET"
-      value: "a0a11aea36000e197cdca95852ec7555a8e29d3dcb2c1b48bb3d6d09f7d266f6"
+      value: "36469aefc03f5658a73ed3eea5f93f5197d55294c266eaeb247d216f20e4cb9d"
     - name: "JENKINS_AGENT_NAME"
       value: "jnlp-wpzfb"
     - name: "JENKINS_NAME"
