@@ -92,14 +92,14 @@ taskcenter-biz:
 gw-midstage-web:
   enabled: true
   image:
-    repository:  192.168.6.11/clv/gw-midstage-midstage-web
+    repository:  192.168.6.11/clv/gw-midstage-web
     tag: dev-latest
 
 # 中台
 gw-midstage-biz:
   enabled: true
   image:
-    repository:  192.168.6.11/clv/gw-midstage-midstage-biz
+    repository:  192.168.6.11/clv/gw-midstage-biz
     tag: dev-latest
 
 # 标准接口
