@@ -5,4 +5,5 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-      - /{{ include "webweex.name" . }}
+      - /weex
+      - /html

@@ -6,6 +6,7 @@ global:
     LOGSTASH_ADDRESS: "\"192.168.6.32:5044\", \"192.168.6.33:5044\", \"192.168.6.34:5044\""
     # 连接的环境，普通的是以dev,cit,uat等来标识。也可以自己定义如t2，一般是特殊情况新建的环境。
     ENV: dev
+    spring_profiles_active: dev
     CONFIG_URL: 172.16.4.177:8091
   root_domain: scm.clvpg.com
 
