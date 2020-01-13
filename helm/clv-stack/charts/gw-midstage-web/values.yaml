@@ -14,9 +14,7 @@ fullnameOverride: ""
 
 service:
   type: ClusterIP
-  ports: 
-    - 20881
-    - 20911
+  port: 8080
 
 env:
   COMP: gw-midstage-web
