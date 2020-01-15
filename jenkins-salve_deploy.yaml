@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jenkins_maven_slave
+  name: jenkins-maven-slave
   labels:
     jenkins: "slave"
     jenkins/jenkins-jnlp: "true"
