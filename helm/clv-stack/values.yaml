@@ -8,6 +8,7 @@ global:
     ENV: dev
     spring_profiles_active: dev
     CONFIG_URL: 172.16.4.177:8091
+    LIB_CLASSPATH: -Xbootclasspath/a:/app/disconf/download
   root_domain: scm.clvpg.com
 
 # 网关
