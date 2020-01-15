@@ -6,7 +6,7 @@ metadata:
     jenkins: "slave"
     jenkins/jenkins-jnlp: "true"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       jenkins: "slave"
