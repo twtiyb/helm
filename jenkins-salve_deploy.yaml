@@ -14,35 +14,35 @@ spec:
         jenkins/jenkins-jnlp: "true"
     spec:
       containers:
-        name: "jnlp"
-        image: "192.168.6.11/base/jenkins-slave-os:v3.1"
-        imagePullPolicy: "IfNotPresent"
-        env:
-          - name: "JENKINS_SECRET"
-            value: "36469aefc03f5658a73ed3eea5f93f5197d55294c266eaeb247d216f20e4cb9d"
-          - name: "JENKINS_AGENT_NAME"
-            value: "jnlp-wpzfb"
-          - name: "JENKINS_NAME"
-            value: "jnlp-wpzfb"
-          - name: "JENKINS_AGENT_WORKDIR"
-            value: "/home/jenkins/agent"
-          - name: "JENKINS_URL"
-            value: "http://jenkins-web-ui.wckj-ops.svc.cluster.local/"
-        volumeMounts:
-          - mountPath: "/target"
-            name: "volume-2"
-            readOnly: false
-          - mountPath: "/root/.m2"
-            name: "volume-1"
-            readOnly: false
-          - mountPath: "/var/run/docker.sock"
-            name: "volume-0"
-            readOnly: false
-          - mountPath: "/home/jenkins/agent"
-            name: "workspace-volume"
-            readOnly: false
-        workingDir: "/home/jenkins/agent"
-        serviceAccount: "jenkins-admin"
+        - name: "jnlp"
+          image: "192.168.6.11/base/jenkins-slave-os:v3.1"
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: "JENKINS_SECRET"
+              value: "36469aefc03f5658a73ed3eea5f93f5197d55294c266eaeb247d216f20e4cb9d"
+            - name: "JENKINS_AGENT_NAME"
+              value: "jnlp-wpzfb"
+            - name: "JENKINS_NAME"
+              value: "jnlp-wpzfb"
+            - name: "JENKINS_AGENT_WORKDIR"
+              value: "/home/jenkins/agent"
+            - name: "JENKINS_URL"
+              value: "http://jenkins-web-ui.wckj-ops.svc.cluster.local/"
+          volumeMounts:
+            - mountPath: "/target"
+              name: "volume-2"
+              readOnly: false
+            - mountPath: "/root/.m2"
+              name: "volume-1"
+              readOnly: false
+            - mountPath: "/var/run/docker.sock"
+              name: "volume-0"
+              readOnly: false
+            - mountPath: "/home/jenkins/agent"
+              name: "workspace-volume"
+              readOnly: false
+          workingDir: "/home/jenkins/agent"
+          serviceAccount: "jenkins-admin"
       volumes:
         - hostPath:
             path: "/var/run/docker.sock"
