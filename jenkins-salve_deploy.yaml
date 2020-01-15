@@ -7,6 +7,10 @@ metadata:
     jenkins/jenkins-jnlp: "true"
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      jenkins: "slave"
+      jenkins/jenkins-jnlp: "true"
   template:
     metadata:
       labels:
@@ -42,7 +46,7 @@ spec:
               name: "workspace-volume"
               readOnly: false
           workingDir: "/home/jenkins/agent"
-          serviceAccount: "jenkins-admin"
+      serviceAccount: "jenkins-admin"
       volumes:
         - hostPath:
             path: "/var/run/docker.sock"
