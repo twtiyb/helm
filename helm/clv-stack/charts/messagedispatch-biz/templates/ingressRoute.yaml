@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - socket-cit3
   routes:
-  - match: "HostSNI(`*`)"
+  - match: HostSNI(`*`)
     kind: Rule
     services:
     - name: {{ include "messagedispatch-biz.fullname" . }}-service
