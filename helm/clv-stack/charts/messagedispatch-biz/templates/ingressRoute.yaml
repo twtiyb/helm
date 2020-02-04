@@ -11,5 +11,3 @@ spec:
     services:
     - name: {{ include "messagedispatch-biz.fullname" . }}-service
       port: {{ .Values.service.port }}
-  tls:
-    secretName: tls
