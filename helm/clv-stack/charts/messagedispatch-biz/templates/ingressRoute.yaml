@@ -1,5 +1,5 @@
 apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+kind: IngressRouteTCP
 metadata:
   name: {{ include "messagedispatch-biz.fullname" . }}-ingressroutebar
 spec:
