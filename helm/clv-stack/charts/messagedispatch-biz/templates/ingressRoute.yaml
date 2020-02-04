@@ -10,6 +10,6 @@ spec:
     kind: Rule
     services:
     - name: {{ include "messagedispatch-biz.fullname" . }}-service
-      port: {{ .Values.se rvice.port }}
+      port: {{ .Values.service.port }}
   tls:
     secretName: tls
