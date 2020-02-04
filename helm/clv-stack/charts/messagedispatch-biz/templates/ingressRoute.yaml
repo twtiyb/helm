@@ -4,7 +4,7 @@ metadata:
   name: {{ include "messagedispatch-biz.fullname" . }}-ingressroutebar
 spec:
   entryPoints:
-    - web
+    - socket-cit3
   routes:
   - match: HostSNI(`*`)
     kind: Rule
