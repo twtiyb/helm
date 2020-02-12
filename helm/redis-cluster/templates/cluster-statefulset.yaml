@@ -117,8 +117,11 @@ spec:
             echo "ERROR: Can not get ip for service $SERVICE."
             exit 1
           fi
-          # echo "# Add cluster-announce-ip automatically when pod start." >>$CONF_DIR/redis.conf
-          # echo "cluster-announce-ip $ANNOUNCE_IP" >>$CONF_DIR/redis.conf
+
+          ANNOUNCE_IP=$(ifconfig eth0 |grep "inet addr"| cut -f 2 -d ":"|cut -f 1 -d " ")
+           echo ${ANNOUNCE_IP}
+           echo "# Add cluster-announce-ip automatically when pod start." >>$CONF_DIR/redis.conf
+           echo "cluster-announce-ip $ANNOUNCE_IP" >>$CONF_DIR/redis.conf
           {{- if $root.Values.auth }}
           if [ "$AUTH" = "" ];then
             echo "ERROR: The cluster requires authentication, but no password was set."
