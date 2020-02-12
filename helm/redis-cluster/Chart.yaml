@@ -1,0 +1,18 @@
+apiVersion: v1
+appVersion: 5.0.6
+description: Highly available Kubernetes implementation of Redis Cluster
+engine: gotpl
+home: http://redis.io/
+icon: https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Redis_Logo.svg/1200px-Redis_Logo.svg.png
+keywords:
+- redis
+- keyvalue
+- database
+- cluster
+maintainers:
+- email: zhaoshan@inspur.com
+  name: zhaoshan
+name: redis-cluster
+sources:
+- https://redis.io/download
+version: 0.0.1
