@@ -5,7 +5,7 @@ metadata:
     io.kompose.service: pinpoint-web
   name: pinpoint-web
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - name: "9997"
     port: 9997
