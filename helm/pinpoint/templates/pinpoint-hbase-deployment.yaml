@@ -1,25 +1,25 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  annotations: {kompose.cmd: kompose convert -c, kompose.version: 1.18.0}
-  labels: {io.kompose.service: pinpoint-hbase}
+  labels:
+    io.kompose.service: pinpoint-hbase
   name: pinpoint-hbase
 spec:
   replicas: 1
-  strategy: {type: Recreate}
   template:
     metadata:
-      labels: {io.kompose.service: pinpoint-hbase}
+      labels:
+        io.kompose.service: pinpoint-hbase
     spec:
       containers:
-      - image: 192.168.6.11/clv/pinpoint-hbase
+      - image: pinpointdocker/pinpoint-hbase:{{ .Values.image.tag }}
         name: pinpoint-hbase
         ports:
-        - {containerPort: 2181}
-        - {containerPort: 60000}
-        - {containerPort: 16010}
-        - {containerPort: 60020}
-        - {containerPort: 16030}
+        - containerPort: 2181
+        - containerPort: 60000
+        - containerPort: 16010
+        - containerPort: 60020
+        - containerPort: 16030
         resources: {}
         # volumeMounts:
         # - {mountPath: /home/pinpoint/hbase, name: pinpoint-hbase-claim0}

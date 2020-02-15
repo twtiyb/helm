@@ -1,22 +1,25 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  annotations: {kompose.cmd: kompose convert -c, kompose.version: 1.18.0}
-  labels: {io.kompose.service: pinpoint-web}
+  labels:
+    io.kompose.service: pinpoint-web
   name: pinpoint-web
 spec:
   replicas: 1
   template:
     metadata:
-      labels: {io.kompose.service: pinpoint-web}
+      labels:
+        io.kompose.service: pinpoint-web
     spec:
       containers:
-      - image: 192.168.6.11/clv/pinpoint-web
+      - image: pinpointdocker/pinpoint-web:{{ .Values.image.tag }}
         name: pinpoint-web
         ports:
-        - {containerPort: 9997}
-        - {containerPort: 8080}
+        - containerPort: 9997
+        - containerPort: 8080
         env:
-        - {name: HBASE_HOST, value: "pinpoint-hbase.default.svc.cluster.local"}
-        - {name: HBASE_PORT, value: "2181"}
+        - name: HBASE_HOST
+          value: "pinpoint-hbase.default.svc.cluster.local"
+        - name: HBASE_PORT
+          value: "2181"
       restartPolicy: Always
