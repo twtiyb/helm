@@ -6,6 +6,10 @@ metadata:
   name: pinpoint-collector
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pinpoint
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
