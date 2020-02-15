@@ -9,11 +9,9 @@ spec:
   ports:
   - name: "9997"
     port: 9997
-    targetPort: 9997
     nodePort: 9997
   - name: "8080"
     port: 8080
     targetPort: 8080
-    nodePort: 8080
   selector:
     io.kompose.service: pinpoint-web
