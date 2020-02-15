@@ -6,7 +6,6 @@ metadata:
   name: pinpoint-web
 spec:
   type: ClusterIP
-
   ports:
   - name: "9997"
     port: 9997
