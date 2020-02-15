@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: pinpoint-web
+    app.kubernetes.io/name: pinpoint-web
   name: pinpoint-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: pinpoint
+      app.kubernetes.io/name: pinpoint-web
   template:
     metadata:
       labels:
-        io.kompose.service: pinpoint-web
+        app.kubernetes.io/name: pinpoint-web
     spec:
       containers:
       - image: pinpointdocker/pinpoint-web:{{ .Values.image.tag }}
