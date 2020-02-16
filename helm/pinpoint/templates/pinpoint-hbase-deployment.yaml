@@ -24,14 +24,17 @@ spec:
         - containerPort: 16010
         - containerPort: 60020
         - containerPort: 16030
-        resources: {}
-        # volumeMounts:
-        # - {mountPath: /home/pinpoint/hbase, name: pinpoint-hbase-claim0}
-        # - {mountPath: /home/pinpoint/zookeeper, name: pinpoint-hbase-claim1}
+        volumeMounts:
+          - mountPath: /home/pinpoint/hbase
+            name: pinpoint-hbase-data
+          - mountPath: /home/pinpoint/zookeeper
+            name: pinpoint-hbase-zk
       restartPolicy: Always
-      # volumes:
-      # - name: pinpoint-hbase-claim0
-      #   persistentVolumeClaim: {claimName: pinpoint-hbase-claim0}
-      # - name: pinpoint-hbase-claim1
-      #   persistentVolumeClaim: {claimName: pinpoint-hbase-claim1}
+      volumes:
+        - name: pinpoint-hbase-data
+          persistentVolumeClaim:
+            claimName: pinpoint-hbase-data
+        - name: pinpoint-hbase-zk
+          persistentVolumeClaim:
+            claimName: pinpoint-hbase-zk
 status: {}
