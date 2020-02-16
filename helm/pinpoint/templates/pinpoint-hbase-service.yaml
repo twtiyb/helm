@@ -5,6 +5,8 @@ metadata:
     app.kubernetes.io/name: pinpoint-hbase
   name: pinpoint-hbase
 spec:
+  type: ClusterIP
+  clusterIP: None
   ports:
   - name: "2181"
     port: 2181
