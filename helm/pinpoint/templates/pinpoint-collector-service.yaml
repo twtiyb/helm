@@ -6,7 +6,6 @@ metadata:
   name: pinpoint-collector
 spec:
   type: ClusterIP
-  clusterIP: None
   ports:
   - name: "9994"
     port: 9994
