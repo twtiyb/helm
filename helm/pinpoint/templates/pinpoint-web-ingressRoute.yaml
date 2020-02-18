@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pinpoint-web-ingressroute
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`pinpoint.scm.clvpg.com`)
+    kind: Rule
+    services:
+    - name: pinpoint-web
+      port: 8080
