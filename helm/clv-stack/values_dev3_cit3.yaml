@@ -5,9 +5,9 @@ global:
     # PINPOINT_COL_IP: 192.168.4.7 
     LOGSTASH_ADDRESS: "\"192.168.6.32:5044\", \"192.168.6.33:5044\", \"192.168.6.34:5044\""
     # 连接的环境，普通的是以dev,cit,uat等来标识。也可以自己定义如t2，一般是特殊情况新建的环境。
-    ENV: cit2
+    ENV: cit3
     CONFIG_URL: 172.16.4.177:8091
-    spring_profiles_active: cit2
+    spring_profiles_active: cit3
     LIB_CLASSPATH: -Xbootclasspath/a:.
   root_domain: scm.clvpg.com
 
@@ -26,6 +26,13 @@ carstore-biz:
   enabled: true
   image:
     repository:  192.168.6.11/clv/carstore-biz
+    tag: dev3-latest
+
+# 硬件连接平台
+hardwarecenter-biz:
+  enabled: true
+  image:
+    repository:  192.168.6.11/clv/hardwarecenter-biz
     tag: dev3-latest
 
 # 行业
