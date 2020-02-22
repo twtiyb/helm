@@ -5,5 +5,4 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-      - /weex
-      - /html
+      - /app
