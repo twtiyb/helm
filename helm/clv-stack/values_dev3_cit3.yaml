@@ -186,26 +186,26 @@ webbackend:
   enabled: true
   image:
     repository:  192.168.6.11/clv/webbackend
-    tag: master-latest
+    tag: cit3-latest
 
 # 前端 - pc端
 web:
   enabled: true
   image:
     repository:  192.168.6.11/clv/web
-    tag: master-latest
+    tag: cit3-latest
 
 # 前端 - h5页面
 webmobile:
   enabled: true
   image:
     repository:  192.168.6.11/clv/webmobile
-    tag: master-latest
+    tag: cit3-latest
 
 # 前端 - webweex
 webweex:
   enabled: false
   image:
     repository:  192.168.6.11/clv/webweex
-    tag: master-latest
+    tag: cit3-latest
 
