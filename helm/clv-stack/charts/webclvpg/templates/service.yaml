@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "webweex.fullname" . }}-service
+  name: {{ include "webclvpg.fullname" . }}-service
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}
   selector:
-    app.kubernetes.io/name: {{ include "clvpg.name" . }}
+    app.kubernetes.io/name: {{ include "webclvpg.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

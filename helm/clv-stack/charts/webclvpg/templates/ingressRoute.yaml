@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: {{ include "clvpg.fullname" . }}-ingressroutebar
+  name: {{ include "webclvpg.fullname" . }}-ingressroutebar
 spec:
   entryPoints:
     - web
@@ -9,7 +9,7 @@ spec:
   - match: Host(`{{ .Release.Name }}.{{  .Values.global.root_domain }}`) && PathPrefix(`/clvpg`)
     kind: Rule
     services:
-    - name: {{ include "clvpg.fullname" . }}-service
+    - name: {{ include "webclvpg.fullname" . }}-service
       port: {{ .Values.service.port }}
     middlewares:
-    - name: {{ include "clvpg.fullname" . }}-middleware
+    - name: {{ include "webclvpg.fullname" . }}-middleware

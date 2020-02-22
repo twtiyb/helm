@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "clvpg.fullname" . }}
+  name: {{ include "webclvpg.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "clvpg.name" . }}
-    helm.sh/chart: {{ include "clvpg.chart" . }}
+    app.kubernetes.io/name: {{ include "webclvpg.name" . }}
+    helm.sh/chart: {{ include "webclvpg.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "clvpg.name" . }}
+      app.kubernetes.io/name: {{ include "webclvpg.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "clvpg.name" . }}
+        app.kubernetes.io/name: {{ include "webclvpg.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:

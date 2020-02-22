@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: {{ include "clvpg.fullname" . }}-middleware
+  name: {{ include "webclvpg.fullname" . }}-middleware
 spec:
   stripPrefix:
     prefixes:
