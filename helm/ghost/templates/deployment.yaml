@@ -3,28 +3,25 @@ kind: Deployment
 metadata:
   name: {{ include "ghost.fullname" . }}
   labels:
-    {{- include "ghost.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ include "ghost.name" . }}
+    helm.sh/chart: {{ include "ghost.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "ghost.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/name: {{ include "ghost.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        {{- include "ghost.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/name: {{ include "ghost.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-    {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             {{- range .Values.service.ports }}
@@ -32,15 +29,24 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            {{- range $key, $val := .Values.global.env }}
+            - name: {{quote $key }}
+              value: {{quote $val  }}
+            {{- end }}
+            {{- range $key, $val := .Values.env }}
+            - name: {{quote $key }}
+              value: {{quote $val  }}
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
+    affinity:
+      {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
+    tolerations:
+      {{- toYaml . | nindent 8 }}
     {{- end }}
