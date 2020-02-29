@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app.kubernetes.io/name: {{ include "ghost.name" . }}
-  name: {{ include "ghost.name" . }}
+  name: ghost-data
 spec:
   accessModes:
   - ReadWriteOnce
