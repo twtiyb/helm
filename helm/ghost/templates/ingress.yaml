@@ -10,4 +10,4 @@ spec:
       kind: Rule
       services:
         - name: {{ include "ghost.fullname" . }}-service
-          port: 8080
+          port: 80
