@@ -27,7 +27,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            {{- range .Values.service.ports }}
+            {{- range .Values.service.port }}
             - containerPort: {{ . }}
             {{- end }}
           resources:
