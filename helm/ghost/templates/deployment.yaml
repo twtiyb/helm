@@ -29,6 +29,9 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/lib/ghost/content
+              name: ghost-data
           env:
             {{- range $key, $val := .Values.global.env }}
             - name: {{quote $key }}
@@ -43,6 +46,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     {{- with .Values.affinity }}
+    volumes:
+      - name: ghost-data
+        persistentVolumeClaim:
+          claimName: ghost-data
     affinity:
       {{- toYaml . | nindent 8 }}
     {{- end }}
