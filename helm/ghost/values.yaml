@@ -35,5 +35,5 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 2368
+  port: 80
 
