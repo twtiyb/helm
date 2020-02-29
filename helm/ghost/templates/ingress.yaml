@@ -39,3 +39,18 @@ spec:
         {{- end }}
   {{- end }}
 {{- end }}
+
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "ghost.fullname" . }}-ingressroute
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`{{ .Release.Name }}.{{  .Values.global.root_domain }}`)
+      kind: Rule
+      services:
+        - name: {{ include "ghost.fullname" . }}-service
+          port: 8080
