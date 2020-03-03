@@ -2,7 +2,8 @@ global:
   env:
     JAVA_MEM_SIZE: -Xmx768m
     # 不启动pinpoint
-    # PINPOINT_COL_IP: 192.168.4.7 
+    PINPOINT: 'true'
+    PINPOINT_COL_IP: pinpoint-collector
     LOGSTASH_ADDRESS: "\"192.168.6.32:5044\", \"192.168.6.33:5044\", \"192.168.6.34:5044\""
     # 连接的环境，普通的是以dev,cit,uat等来标识。也可以自己定义如t2，一般是特殊情况新建的环境。
     ENV: cit3
