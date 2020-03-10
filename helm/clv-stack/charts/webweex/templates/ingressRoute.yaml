@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`{{if .Values.global.product }}{{ .Release.Name }}.{{end}}{{  .Values.global.root_domain }}`) && (PathPrefix(`/app/html`) || PathPrefix(`/app/weex`))
+  - match: Host(`{{if not .Values.global.product }}{{ .Release.Name }}.{{end}}{{  .Values.global.root_domain }}`) && (PathPrefix(`/app/html`) || PathPrefix(`/app/weex`))
     kind: Rule
     services:
     - name: {{ include "webweex.fullname" . }}-service
