@@ -11,6 +11,7 @@ global:
     LIB_CLASSPATH: -Xbootclasspath/a:.
   root_domain: scm.clvpg.com
   product: false
+  nodeSelector: {}
 
 # 网关
 gateway-web:
