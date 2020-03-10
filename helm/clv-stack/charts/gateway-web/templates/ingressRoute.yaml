@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`{{ .Release.Name }}.{{  .Values.global.root_domain }}`) && PathPrefix(`/gateway/`)
+  - match: Host(`{{if not .Values.global.product }}{{ .Release.Name }}.{{end}}{{  .Values.global.root_domain }}`) && PathPrefix(`/gateway/`)
     kind: Rule
     services:
     - name: {{ include "gateway-web.fullname" . }}-service
