@@ -139,6 +139,8 @@ messagedispatch-biz:
   image:
     repository:  192.168.6.11/clv/messagedispatch-biz
     tag: dev3-latest
+  env:
+    SERVER_PORT: 7799
   service:
     type: ClusterIP
     port: 7799
