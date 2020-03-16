@@ -214,14 +214,14 @@ webmobile:
 
 # 前端 - webweex
 webweex:
-  enabled: false
+  enabled: true
   image:
     repository:  192.168.6.11/clv/webweex
     tag: master-latest
 
 # 前端 - clvpg
 webclvpg:
-  enabled: false
+  enabled: true
   image:
     repository:  192.168.6.11/clv/webclvpg
     tag: master-latest
