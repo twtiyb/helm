@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "webpgh5.fullname" . }}-service
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+  selector:
+    app.kubernetes.io/name: {{ include "webpgh5.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

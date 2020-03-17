@@ -205,3 +205,11 @@ webweex:
     repository:  192.168.6.11/clv/webweex
     tag: master-latest
 
+
+# 前端 - pgh5
+webpgh5:
+  enabled: false
+  image:
+    repository:  192.168.6.11/clv/pgh5
+    tag: master-latest
+
