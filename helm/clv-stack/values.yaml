@@ -210,6 +210,6 @@ webweex:
 webpgh5:
   enabled: false
   image:
-    repository:  192.168.6.11/clv/pgh5
+    repository:  192.168.6.11/clv/webpgh5
     tag: master-latest
 

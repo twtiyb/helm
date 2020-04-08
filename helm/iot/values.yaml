@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: 192.168.6.11/clv/iot-nano:pro_0.9.3
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -14,7 +14,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
@@ -29,10 +29,11 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-
+env:
+  MachineId : 1
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 ingress:
   enabled: false

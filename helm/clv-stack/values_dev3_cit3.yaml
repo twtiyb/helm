@@ -1,6 +1,6 @@
 global:
   env:
-    JAVA_MEM_SIZE: -Xmx768m
+    JAVA_MEM_SIZE: -Xmx1024m
     # 不启动pinpoint
     PINPOINT: 'true'
     PINPOINT_COL_IP: pinpoint-collector
