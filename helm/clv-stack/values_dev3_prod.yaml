@@ -12,8 +12,8 @@ global:
     LIB_CLASSPATH: -Xbootclasspath/a:.
   root_domain: pg.clvpg.com
   product: true
-#  nodeSelector:
-#    kubernetes.io/hostname: k8s-prod-slave01
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 # 网关
 gateway-web:
