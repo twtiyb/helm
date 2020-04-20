@@ -228,7 +228,7 @@ webclvpg:
 
 # 前端 - pgh5
 webpgh5:
-  enabled: false
+  enabled: true
   image:
     repository:  192.168.6.11/clv/webpgh5
     tag: master-latest
