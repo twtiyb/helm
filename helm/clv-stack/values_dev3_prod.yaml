@@ -112,6 +112,8 @@ taskcenter-biz:
   image:
     repository:  192.168.6.11/clv/taskcenter-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 # 中台
 gw-midstage-web:
@@ -119,6 +121,8 @@ gw-midstage-web:
   image:
     repository:  192.168.6.11/clv/gw-midstage-web
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 # 中台
 gw-midstage-biz:
@@ -126,6 +130,8 @@ gw-midstage-biz:
   image:
     repository:  192.168.6.11/clv/gw-midstage-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 # 标准接口
 openapi-web:
