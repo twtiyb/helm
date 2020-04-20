@@ -12,8 +12,6 @@ global:
     LIB_CLASSPATH: -Xbootclasspath/a:.
   root_domain: pg.clvpg.com
   product: true
-  nodeSelector:
-    kubernetes.io/hostname: k8s-prod-salve03
 
 # 网关
 gateway-web:
@@ -31,6 +29,8 @@ carstore-biz:
   image:
     repository:  192.168.6.11/clv/carstore-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 # 硬件连接平台
 hardwarecenter-biz:
@@ -38,6 +38,8 @@ hardwarecenter-biz:
   image:
     repository:  192.168.6.11/clv/hardwarecenter-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 # 行业
 commonindustry-biz:
@@ -45,6 +47,9 @@ commonindustry-biz:
   image:
     repository:  192.168.6.11/clv/commonindustry-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
+
 
 # 用户
 usercenter-biz:
@@ -52,6 +57,8 @@ usercenter-biz:
   image:
     repository:  192.168.6.11/clv/usercenter-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 
 # 资源
@@ -60,6 +67,9 @@ resourcecenter-biz:
   image:
     repository:  192.168.6.11/clv/resourcecenter-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
+
 
 # 契约
 contractcenter-biz:
@@ -67,6 +77,8 @@ contractcenter-biz:
   image:
     repository:  192.168.6.11/clv/contractcenter-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 
 # 外部接口
@@ -75,6 +87,8 @@ datasync-web:
   image:
     repository:  192.168.6.11/clv/datasync-web
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8s-prod-salve03
 
 # 外部接口
 datasync-biz:
