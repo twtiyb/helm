@@ -13,7 +13,8 @@ persistence:
   enabled: true
   size: 50Gi
 
-nodeSelector: {}
+nodeSelector:
+  kubernetes.io/hostname: k8s-prod-salve03
 
 tolerations: []
 
