@@ -18,7 +18,7 @@ persistence:
   size: 50Gi
 
 nodeSelector:
-  kubernetes.io/hostname: k8s3
+  kubernetes.io/hostname: k8ss3
 
 tolerations: []
 
