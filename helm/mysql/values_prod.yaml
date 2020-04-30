@@ -13,6 +13,8 @@ mysqlRootPassword: 123123aa
 
 persistence:
   enabled: true
+  storageClass: local
+  volumeName: mysql-pvc
   size: 50Gi
 
 nodeSelector:
