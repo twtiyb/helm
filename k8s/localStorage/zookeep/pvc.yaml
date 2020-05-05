@@ -1,6 +1,21 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
+  name: data-zookeeper-0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: local-storage
+
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
   name: data-zookeeper-1
 spec:
   accessModes:
@@ -10,27 +25,12 @@ spec:
       storage: 5Gi
   storageClassName: local-storage
 
-
 ---
 
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: data-zookeeper-2
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-  storageClassName: local-storage
-
----
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: data-zookeeper-3
 spec:
   accessModes:
     - ReadWriteOnce
