@@ -71,3 +71,75 @@ spec:
               values:
                 - k8ss3
                 - k8ss4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-node3-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /home/localdata/redis/node4
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8ss3
+                - k8ss4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-node4-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /home/localdata/redis/node5
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8ss3
+                - k8ss4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-node5-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /home/localdata/redis/node6
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8ss3
+                - k8ss4
