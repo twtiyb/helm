@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: redis-node1-pv
+  name: redis-node0-pv
 spec:
   capacity:
     storage: 5Gi
@@ -27,7 +27,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: redis-node2-pv
+  name: redis-node1-pv
 spec:
   capacity:
     storage: 5Gi
@@ -52,7 +52,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: redis-node3-pv
+  name: redis-node2-pv
 spec:
   capacity:
     storage: 5Gi
