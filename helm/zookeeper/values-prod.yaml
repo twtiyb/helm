@@ -31,7 +31,7 @@ image:
   ## It turns BASH and NAMI debugging in minideb
   ## ref:  https://github.com/bitnami/minideb-extras/#turn-on-bash-debugging
   ##
-  debug: false
+  debug: true
 
 ## String to partially override zookeeper.fullname template (will maintain the release name)
 # nameOverride:
