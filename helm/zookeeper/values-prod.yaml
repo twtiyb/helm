@@ -221,6 +221,7 @@ securityContext:
 ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
 ##   GKE, AWS & OpenStack)
 ##
+storageClass: "local-storage"
 persistence:
   enabled: true
   ## A manually managed Persistent Volume and Claim
