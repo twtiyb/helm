@@ -24,6 +24,29 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: esdata2-pv
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /home/localdata/elk/esdata2
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8ss4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: esmaster
 spec:
   capacity:
@@ -34,6 +57,29 @@ spec:
   storageClassName: local-storage
   local:
     path: /home/localdata/elk/esmaster
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8ss4
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: esmaster2
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /home/localdata/elk/esmaster2
   nodeAffinity:
     required:
       nodeSelectorTerms:
