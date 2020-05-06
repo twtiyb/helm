@@ -1,0 +1,127 @@
+# Default values for elk.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+elasticsearch:
+  enabled: true
+
+kibana:
+  enabled: true
+  env:
+    ELASTICSEARCH_HOSTS: http://{{ .Release.Name }}-elasticsearch-client:9200
+
+logstash:
+  enabled: true
+  # elasticsearch:
+  #   host: elastic-stack-elasticsearch-client
+
+  filters:
+    main: |-
+      filter {
+        if [fields][file_type] == "access_log" {
+          grok {
+            match => { "message" => "%{IPORHOST:client} %{USER:ident} %{USER:auth}(?: %{URIPATHPARAM:path})? \[%{HTTPDATE:querytime}\] \"(?:%{WORD:verb} %{URIPATHPARAM:request}(?: HTTP/%{NUMBER:http_ver})?|-)\" %{NUMBER:status} (?:%{NUMBER:bytes}|-) %{NUMBER:response_time} \"(?:%{URI:referer}|-)\" %{QS:agent}" }
+          }
+          date {
+            match => ["querytime", "dd/MMM/yyyy:HH:mm:ss Z"]
+            remove_field => ["querytime"]
+          }
+          mutate {
+            add_field => {
+              "[@metadata][file_type]" => "%{[fields][file_type]}"
+              "[@metadata][env]" => "%{[fields][env]}"
+              "app_name" => "%{[fields][app_name]}"
+              "app_id" => "%{[fields][app_id]}"
+            }
+            convert => {"bytes" => "integer" "status"=>"integer" "response_time" => "integer" }
+            remove_field => ["beat", "fields", "type", "tags"]
+          }
+        } else if [fields][file_type] == "java_log" {
+          grok {
+            match => {"message" => "\[%{TIMESTAMP_ISO8601:logtime}\] %{LOGLEVEL:level} %{HTTPDUSER:traceId}\:%{HTTPDUSER:subId}(\:%{HTTPDUSER:userId})?(\:%{GREEDYDATA:ppId})? \[%{DATA:thread}\] %{JAVACLASS:class}\.%{JAVAMETHOD:class_method}\(%{JAVAFILE:class_file}(?::%{NUMBER:class_line})?\) - %{JAVALOGMESSAGE:message}"}
+            overwrite => ["message"]
+          }
+          date {
+            match => ["logtime", "yyyy-MM-dd HH:mm:ss,SSS"]
+            remove_field => ["logtime"]
+          }
+          mutate {
+            add_field => {
+              "[@metadata][file_type]" => "%{[fields][file_type]}"
+              "[@metadata][env]" => "%{[fields][env]}"
+              "app_name" => "%{[fields][app_name]}"
+              "app_id" => "%{[fields][app_id]}"
+            }
+            convert => {"class_line" => "integer"}
+            remove_field => ["beat", "fields", "type", "tags"]
+          }
+        }
+      }
+  outputs:
+    main: |-
+      output {
+        if [@metadata][file_type] == "access_log" {
+          elasticsearch {
+            hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
+            index => "%{[@metadata][env]}_access_%{app_name}_%{+YYYY.MM.dd}"
+            document_type => "%{[@metadata][type]}"
+          }
+        } else if [@metadata][file_type] == "java_log" {
+          elasticsearch {
+            hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
+            index => "%{[@metadata][env]}_%{app_name}_%{+YYYY.MM.dd}"
+            document_type => "%{[@metadata][type]}"
+          }
+        }
+        #stdout { codec => rubydebug }
+      }
+
+filebeat:
+  enabled: false
+  # config:
+  #   output.file.enabled: false
+  #   output.logstash:
+  #     hosts: ["elastic-stack-logstash:5044"]
+  # indexTemplateLoad:
+  #   - elastic-stack-elasticsearch-client:9200
+
+fluentd:
+  enabled: false
+
+fluent-bit:
+  enabled: false
+
+fluentd-elasticsearch:
+  enabled: false
+
+nginx-ldapauth-proxy:
+  enabled: false
+  # Example config to get it working with ELK. Adjust as you need to.
+  # proxy:
+  #   port: 5601
+  #   # This is the internal hostname for the kibana service
+  #   host: "elk-kibana.default.svc.cluster.local"
+  #   authName: "ELK:Infrastructure:LDAP"
+  #   ldapHost: "ldap.example.com"
+  #   ldapDN: "dc=example,dc=com"
+  #   ldapFilter: "objectClass=organizationalPerson"
+  #   ldapBindDN: "cn=reader,dc=example,dc=com"
+  #   requires:
+  #     - name: "ELK-USER"
+  #       filter: "cn=elkuser,ou=groups,dc=example,dc=com"
+  # ingress:
+  #   enabled: true
+  #   hosts:
+  #     - "elk.example.com"
+  #   annotations:
+  #     kubernetes.io/ingress.class: nginx
+  #   tls:
+  #     - hosts:
+  #       - elk.example.com
+  #       secretName: example-elk-tls
+  # secrets:
+  #   ldapBindPassword: PASSWORD
+elasticsearch-curator:
+  enabled: false
+
+elasticsearch-exporter:
+  enabled: false
