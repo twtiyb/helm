@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: elk-ingressroute
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`elk.clvpg.com`)
+    kind: Rule
+    services:
+    - name: elk-kibana
+      port: 443
