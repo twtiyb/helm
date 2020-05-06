@@ -4,7 +4,7 @@ metadata:
   name: esdata-pv
 spec:
   capacity:
-    storage: 100Gi
+    storage: 50Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
@@ -27,7 +27,7 @@ metadata:
   name: esdata2-pv
 spec:
   capacity:
-    storage: 100Gi
+    storage: 50Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
@@ -50,7 +50,7 @@ metadata:
   name: esmaster
 spec:
   capacity:
-    storage: 5Gi
+    storage: 4Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
@@ -73,7 +73,7 @@ metadata:
   name: esmaster2
 spec:
   capacity:
-    storage: 5Gi
+    storage: 4Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete

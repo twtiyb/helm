@@ -10,7 +10,7 @@ elasticsearch:
   data:
     persistence:
       storageClass: "local-storage"
-      size: 100Gi
+      size: 50Gi
 kibana:
   enabled: true
   env:
