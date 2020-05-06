@@ -12,4 +12,4 @@ spec:
     services:
     - name: elk-kibana
       port: 443
-    tls: {}
+  tls: {}
