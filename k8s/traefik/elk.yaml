@@ -4,7 +4,7 @@ metadata:
   name: elk-ingressroute
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
   - match: Host(`elk.clvpg.com`)
     kind: Rule
