@@ -3,7 +3,14 @@
 # Declare variables to be passed into your templates.
 elasticsearch:
   enabled: true
-
+  master:
+    persistence:
+      enabled: true
+      storageClassName: "local-storage"
+  data:
+    persistence:
+      storageClassName: "local-storage"
+      size: 100Gi
 kibana:
   enabled: true
   env:
@@ -13,7 +20,9 @@ logstash:
   enabled: true
   # elasticsearch:
   #   host: elastic-stack-elasticsearch-client
-
+  persistence:
+    enabled: true
+    storageClassName: "local-storage"
   filters:
     main: |-
       filter {
