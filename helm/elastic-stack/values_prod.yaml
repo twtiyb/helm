@@ -6,10 +6,10 @@ elasticsearch:
   master:
     persistence:
       enabled: true
-      storageClassName: "local-storage"
+      storageClass: "local-storage"
   data:
     persistence:
-      storageClassName: "local-storage"
+      storageClass: "local-storage"
       size: 100Gi
 kibana:
   enabled: true
@@ -22,7 +22,7 @@ logstash:
   #   host: elastic-stack-elasticsearch-client
   persistence:
     enabled: true
-    storageClassName: "local-storage"
+    storageClass: "local-storage"
   filters:
     main: |-
       filter {

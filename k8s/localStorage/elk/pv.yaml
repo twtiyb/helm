@@ -27,7 +27,7 @@ metadata:
   name: esmaster
 spec:
   capacity:
-    storage: 2Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
