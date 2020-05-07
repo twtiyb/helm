@@ -18,6 +18,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
+                - k8ss2
                 - k8ss3
                 - k8ss4
 
@@ -42,6 +43,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
+                - k8ss2
                 - k8ss3
                 - k8ss4
 
@@ -66,5 +68,6 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
+                - k8ss2
                 - k8ss3
                 - k8ss4
