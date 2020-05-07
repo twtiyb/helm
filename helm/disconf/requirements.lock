@@ -1,0 +1,12 @@
+dependencies:
+- name: mysql
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 0.3.0
+- name: zookeeper
+  repository: https://caiwenhao.github.io/charts/
+  version: 0.0.1
+- name: redis-ha
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 0.2.1
+digest: sha256:f6601619c656da53137b9b845d8dcebf939c868443cc7b3a5c5b3736754b2784
+generated: 2017-11-13T15:00:48.544390052+08:00

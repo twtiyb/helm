@@ -1,61 +1,77 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ include "disconf.fullname" . }}
+  name: {{ template "fullname" . }}
   labels:
-    {{- include "disconf.labels" . | nindent 4 }}
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
-{{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-{{- end }}
-  selector:
-    matchLabels:
-      {{- include "disconf.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicas }}
   template:
     metadata:
-    {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
       labels:
-        {{- include "disconf.selectorLabels" . | nindent 8 }}
+        app: {{ template "fullname" . }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "disconf.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      - name: tomcat
+        image: "{{ .Values.disconf.image }}:{{ .Values.disconf.imageTag }}"
+        imagePullPolicy: {{ .Values.imagePullPolicy | quote }}                                  
+        ports:
+        - name: disconf
+          containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /api/config/item?app=1
+            port: 8080
+          initialDelaySeconds: 120
+          timeoutSeconds: 5
+          failureThreshold: 6
+        readinessProbe:
+          httpGet:
+            path: /api/config/item?app=1
+            port: 8080
+        volumeMounts:
+        - name: configurations
+          mountPath: /tmp/conf
+        - name: html
+          mountPath: /data
+        resources:
+{{ toYaml .Values.disconf.resources | indent 10 }}             
+      - name: nginx
+        image: "{{ .Values.nginx.image }}:{{ .Values.nginx.imageTag }}"
+        imagePullPolicy: {{ .Values.imagePullPolicy | quote }}                                 
+        ports:
+        - name: nginx
+          containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+          initialDelaySeconds: 120
+          timeoutSeconds: 5
+          failureThreshold: 6
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx/conf.d/
+        - name: html
+          mountPath: /data
+        resources:
+{{ toYaml .Values.disconf.resources | indent 10 }}       
+      volumes:
+      - name: configurations
+        configMap:
+          name: {{ template "fullname" . }}
+      - name: html
+        emptyDir: {}
+      - name: nginx
+        configMap:
+          name: {{ template "fullname" . }}
+          items:
+          - key: default.conf
+            path: default.conf
