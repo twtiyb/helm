@@ -68,12 +68,12 @@ spec:
             value: "standalone"
           - name: SPRING_DATASOURCE_PLATFORM
             value: "mysql"
-          - name: MYSQL_MASTER_SERVICE_DB_NAME
+          - name: MYSQL_SERVICE_DB_NAME
             valueFrom:
                configMapKeyRef:
                  name: nacos-cm
                  key: mysql.master.db.name
-          - name: MYSQL_MASTER_SERVICE_PORT
+          - name: MYSQL_SERVICE_PORT
             valueFrom:
               configMapKeyRef:
                  name: nacos-cm
@@ -83,12 +83,12 @@ spec:
               configMapKeyRef:
                  name: nacos-cm
                  key: mysql.slave.port
-          - name: MYSQL_MASTER_SERVICE_USER
+          - name: MYSQL_SERVICE_USER
             valueFrom:
               configMapKeyRef:
                  name: nacos-cm
                  key: mysql.master.user
-          - name: MYSQL_MASTER_SERVICE_PASSWORD
+          - name: MYSQL_SERVICE_PASSWORD
             valueFrom:
               configMapKeyRef:
                  name: nacos-cm
@@ -116,27 +116,22 @@ spec:
                 fieldPath: metadata.namespace
           - name: PREFER_HOST_MODE
             value: {{ .Values.env.preferhostmode | quote }}
-          - name: MYSQL_MASTER_SERVICE_DB_NAME
+          - name: MYSQL_SERVICE_DB_NAME
             valueFrom:
               configMapKeyRef:
                 name: nacos-cm
                 key: mysql.master.db.name
-          - name: MYSQL_MASTER_SERVICE_PORT
+          - name: MYSQL_SERVICE_PORT
             valueFrom:
               configMapKeyRef:
                  name: nacos-cm
                  key: mysql.master.port
-          - name: MYSQL_SLAVE_SERVICE_PORT
-            valueFrom:
-              configMapKeyRef:
-                 name: nacos-cm
-                 key: mysql.slave.port
-          - name: MYSQL_MASTER_SERVICE_USER
+          - name: MYSQL_SERVICE_USER
             valueFrom:
               configMapKeyRef:
                  name: nacos-cm
                  key: mysql.master.user
-          - name: MYSQL_MASTER_SERVICE_PASSWORD
+          - name: MYSQL_SERVICE_PASSWORD
             valueFrom:
               configMapKeyRef:
                  name: nacos-cm
