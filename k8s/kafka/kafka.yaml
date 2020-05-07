@@ -48,18 +48,6 @@ spec:
                     values: 
                     - kafka
               topologyKey: "kubernetes.io/hostname"
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-             - weight: 1
-               podAffinityTerm:
-                 labelSelector:
-                    matchExpressions:
-                      - key: "app"
-                        operator: In
-                        values: 
-                        - zk
-                 topologyKey: "kubernetes.io/hostname"
-      terminationGracePeriodSeconds: 300
       containers:
       - name: k8skafka
         imagePullPolicy: Always
