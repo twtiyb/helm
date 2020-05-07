@@ -37,6 +37,7 @@ spec:
     metadata:
       labels:
         app: kafka
+    spec:
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -44,9 +45,12 @@ spec:
                 matchExpressions:
                   - key: "app"
                     operator: In
-                    values: 
-                    - kafka
+                    values:
+                      - kafka
               topologyKey: "kubernetes.io/hostname"
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
       containers:
       - name: k8skafka
         imagePullPolicy: Always
@@ -162,9 +166,7 @@ spec:
             - sh 
             - -c 
             - "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server=localhost:9093"
-      securityContext:
-        runAsUser: 1000
-        fsGroup: 1000
+
   volumeClaimTemplates:
   - metadata:
       name: datadir
