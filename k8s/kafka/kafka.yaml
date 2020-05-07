@@ -35,6 +35,9 @@ spec:
       labels:
         app: kafka
     spec:
+      selector:
+        matchLabels:
+          app: kafka
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
