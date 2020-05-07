@@ -30,14 +30,14 @@ metadata:
 spec:
   serviceName: kafka-svc
   replicas: 3
+  spec:
+    selector:
+      matchLabels:
+        app: kafka
   template:
     metadata:
       labels:
         app: kafka
-    spec:
-      selector:
-        matchLabels:
-          app: kafka
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
