@@ -17,6 +17,7 @@ nginx:
       cpu: 100m
 replicas: 1
 DISCONF_DOAMIN: disconf-th2.lifesense.com
+
 #mail
 EMAIL_MONITOR_ON: true
 EMAIL_HOST: smtp.163.com
