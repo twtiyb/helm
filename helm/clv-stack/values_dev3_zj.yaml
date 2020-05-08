@@ -22,6 +22,8 @@ gateway-web:
     tag: dev3-latest
   ingress:
     enabled: false
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
 
 # 汽车行业
 carstore-biz:
@@ -49,6 +51,7 @@ commonindustry-biz:
     tag: dev3-latest
   nodeSelector:
     kubernetes.io/hostname: k8ss1
+
 
 
 # 用户
@@ -96,6 +99,9 @@ datasync-biz:
   image:
     repository:  habor.clvpg.com/clv/datasync-biz
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
+
 
 
 # 财务
@@ -104,7 +110,8 @@ accountingcenter-biz:
   image:
     repository:  habor.clvpg.com/clv/accountingcenter-biz
     tag: dev3-latest
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 
 # 任务
 taskcenter-biz:
@@ -123,7 +130,6 @@ gw-midstage-web:
     tag: dev3-latest
   nodeSelector:
     kubernetes.io/hostname: k8ss1
-
 # 中台
 gw-midstage-biz:
   enabled: true
@@ -139,19 +145,23 @@ openapi-web:
   image:
     repository:  habor.clvpg.com/clv/openapi-web
     tag: dev3-latest
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 openapi-biz:
   enabled: true
   image:
     repository:  habor.clvpg.com/clv/openapi-biz
     tag: dev3-latest
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 # 极光推送
 push-jar:
   enabled: false
   image:
     repository:  habor.clvpg.com/clv/push-jar
     tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 
 # 长连接
 messagedispatch-biz:
@@ -164,7 +174,8 @@ messagedispatch-biz:
   service:
     type: ClusterIP
     port: 7799
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 
 # 长连接
 channelcenter-biz:
@@ -172,7 +183,8 @@ channelcenter-biz:
   image:
     repository:  habor.clvpg.com/clv/channelcenter-biz
     tag: dev3-latest
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 # 规则中心
 rulecenter-web:
   enabled: true
@@ -180,6 +192,8 @@ rulecenter-web:
     repository:  habor.clvpg.com/clv/rulecenter-web
     tag: dev3-latest
 
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 # 规则中心
 rulecenter-biz:
   enabled: true
@@ -187,6 +201,8 @@ rulecenter-biz:
     repository:  habor.clvpg.com/clv/rulecenter-biz
     tag: dev3-latest
 
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 # 搜索中心
 searchcenter-biz:
   enabled: false
@@ -194,6 +210,8 @@ searchcenter-biz:
     repository:  habor.clvpg.com/clv/searchcenter-biz
     tag: dev3-latest
 
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 
 # bi
 supplychainbi-biz:
@@ -201,7 +219,8 @@ supplychainbi-biz:
   image:
     repository:  habor.clvpg.com/clv/supplychainbi-biz
     tag: dev3-latest
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 
 # 目标
 targetcenter-biz:
@@ -209,7 +228,8 @@ targetcenter-biz:
   image:
     repository:  habor.clvpg.com/clv/targetcenter-biz
     tag: dev3-latest
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 
 # 前端 - 中台
 webbackend:
@@ -217,6 +237,8 @@ webbackend:
   image:
     repository:  habor.clvpg.com/clv/webbackend
     tag: master-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 
 # 前端 - pc端
 web:
@@ -224,6 +246,8 @@ web:
   image:
     repository:  habor.clvpg.com/clv/web
     tag: master-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 
 # 前端 - h5页面
 webmobile:
@@ -231,6 +255,9 @@ webmobile:
   image:
     repository:  habor.clvpg.com/clv/webmobile
     tag: master-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
+
 
 # 前端 - webweex
 webweex:
@@ -238,17 +265,21 @@ webweex:
   image:
     repository:  habor.clvpg.com/clv/webweex
     tag: master-latest
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 # 前端 - clvpg
 webclvpg:
   enabled: true
   image:
     repository:  habor.clvpg.com/clv/webclvpg
     tag: master-latest
-
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
 # 前端 - pgh5
 webpgh5:
   enabled: true
   image:
     repository:  habor.clvpg.com/clv/webpgh5
     tag: master-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss2
