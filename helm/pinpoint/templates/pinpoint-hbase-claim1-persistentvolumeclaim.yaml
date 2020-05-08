@@ -9,4 +9,11 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 3Gi
+  {{- if .Values.persistence.storageClass }}
+  {{- if (eq "-" .Values.persistence.storageClass) }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{ .Values.persistence.storageClass }}"
+  {{- end }}
+  {{- end }}

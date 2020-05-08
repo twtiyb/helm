@@ -1,2 +1,4 @@
 image:
   tag: 1.8.5
+persistence:
+  storageClass: "local-storage"
