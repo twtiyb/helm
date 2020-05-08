@@ -13,13 +13,13 @@ elasticsearch:
       size: 50Gi
 kibana:
   enabled: true
-  config:
+  env:
     ELASTICSEARCH_HOSTS: http://{{ .Release.Name }}-elasticsearch-client:9200
 
 logstash:
   enabled: true
-  # elasticsearch:
-  #   host: elastic-stack-elasticsearch-client
+  elasticsearch:
+    host: {{ .Release.Name }}-elasticsearch-client
   persistence:
     enabled: true
     storageClass: "local-storage"
@@ -70,13 +70,13 @@ logstash:
       output {
         if [@metadata][file_type] == "access_log" {
           elasticsearch {
-            hosts => ["${ELASTICSEARCH_HOSTS}:${ELASTICSEARCH_PORT}"]
+            hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
             index => "%{[@metadata][env]}_access_%{app_name}_%{+YYYY.MM.dd}"
             document_type => "%{[@metadata][type]}"
           }
         } else if [@metadata][file_type] == "java_log" {
           elasticsearch {
-            hosts => ["${ELASTICSEARCH_HOSTS}:${ELASTICSEARCH_PORT}"]
+            hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
             index => "%{[@metadata][env]}_%{app_name}_%{+YYYY.MM.dd}"
             document_type => "%{[@metadata][type]}"
           }
