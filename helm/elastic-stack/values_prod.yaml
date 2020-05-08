@@ -19,7 +19,7 @@ kibana:
 logstash:
   enabled: true
   elasticsearch:
-    host: {{ .Release.Name }}-elasticsearch-client
+     host: http://{{ .Release.Name }}-elasticsearch-client
   persistence:
     enabled: true
     storageClass: "local-storage"
