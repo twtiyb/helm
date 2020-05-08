@@ -11,7 +11,7 @@ spec:
     name: server
   clusterIP: None
   selector:
-    app: disconf
+    app: nginx
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -34,5 +34,12 @@ spec:
         imagePullPolicy: Always
         image: harbor.clvpg.com/clv/disconf:latest
         ports:
-        - containerPort: 80
-          name: server
+        - containerPort: 8080
+          name: disconf
+      - name: nginx
+        imagePullPolicy: Always
+        image: harbor.clvpg.com/clv/disconf:latest
+        ports:
+        - containerPort: 8091
+          hostPort: 80
+          name: nginx
