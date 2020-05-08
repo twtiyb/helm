@@ -1,0 +1,254 @@
+global:
+  env:
+    JAVA_MEM_SIZE: -Xmx1024m
+    # 不启动pinpoint
+#    PINPOINT: 'true'
+#    PINPOINT_COL_IP: pinpoint-collector
+    LOGSTASH_ADDRESS: "\"elk-logstash.default.svc.cluster.local:5044\""
+    # 连接的环境，普通的是以dev,cit,uat等来标识。也可以自己定义如t2，一般是特殊情况新建的环境。
+    ENV: prod
+    CONFIG_URL: 172.16.4.177:8091
+    spring_profiles_active: prod
+    LIB_CLASSPATH: -Xbootclasspath/a:.
+  root_domain: pg.clvpg.com
+  product: true
+
+# 网关
+gateway-web:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/gateway-web
+    # 代码的版本，一般以v1 .4.4-build_number 方式来标识。
+    tag: dev3-latest
+  ingress:
+    enabled: false
+
+# 汽车行业
+carstore-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/carstore-biz
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+# 硬件连接平台
+hardwarecenter-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/hardwarecenter-biz
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+# 行业
+commonindustry-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/commonindustry-biz
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+
+# 用户
+usercenter-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/usercenter-biz
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+
+# 资源
+resourcecenter-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/resourcecenter-biz
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+
+# 契约
+contractcenter-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/contractcenter-biz
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+
+# 外部接口
+datasync-web:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/datasync-web
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+# 外部接口
+datasync-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/datasync-biz
+    tag: dev3-latest
+
+
+# 财务
+accountingcenter-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/accountingcenter-biz
+    tag: dev3-latest
+
+
+# 任务
+taskcenter-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/taskcenter-biz
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+# 中台
+gw-midstage-web:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/gw-midstage-web
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+# 中台
+gw-midstage-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/gw-midstage-biz
+    tag: dev3-latest
+  nodeSelector:
+    kubernetes.io/hostname: k8ss1
+
+# 标准接口
+openapi-web:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/openapi-web
+    tag: dev3-latest
+
+openapi-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/openapi-biz
+    tag: dev3-latest
+
+# 极光推送
+push-jar:
+  enabled: false
+  image:
+    repository:  habor.clvpg.com/clv/push-jar
+    tag: dev3-latest
+
+# 长连接
+messagedispatch-biz:
+  enabled: false
+  image:
+    repository:  habor.clvpg.com/clv/messagedispatch-biz
+    tag: dev3-latest
+  env:
+    netty.port: 7799
+  service:
+    type: ClusterIP
+    port: 7799
+
+
+# 长连接
+channelcenter-biz:
+  enabled: false
+  image:
+    repository:  habor.clvpg.com/clv/channelcenter-biz
+    tag: dev3-latest
+
+# 规则中心
+rulecenter-web:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/rulecenter-web
+    tag: dev3-latest
+
+# 规则中心
+rulecenter-biz:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/rulecenter-biz
+    tag: dev3-latest
+
+# 搜索中心
+searchcenter-biz:
+  enabled: false
+  image:
+    repository:  habor.clvpg.com/clv/searchcenter-biz
+    tag: dev3-latest
+
+
+# bi
+supplychainbi-biz:
+  enabled: false
+  image:
+    repository:  habor.clvpg.com/clv/supplychainbi-biz
+    tag: dev3-latest
+
+
+# 目标
+targetcenter-biz:
+  enabled: false
+  image:
+    repository:  habor.clvpg.com/clv/targetcenter-biz
+    tag: dev3-latest
+
+
+# 前端 - 中台
+webbackend:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/webbackend
+    tag: master-latest
+
+# 前端 - pc端
+web:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/web
+    tag: master-latest
+
+# 前端 - h5页面
+webmobile:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/webmobile
+    tag: master-latest
+
+# 前端 - webweex
+webweex:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/webweex
+    tag: master-latest
+
+# 前端 - clvpg
+webclvpg:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/webclvpg
+    tag: master-latest
+
+# 前端 - pgh5
+webpgh5:
+  enabled: true
+  image:
+    repository:  habor.clvpg.com/clv/webpgh5
+    tag: master-latest
