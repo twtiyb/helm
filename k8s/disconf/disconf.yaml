@@ -29,7 +29,7 @@ spec:
         #image: harbor.clvpg.com/clv/disconf:latest
         image: habor.clvpg.com/clv/disconf_nginx:latest
         ports:
-        - containerPort: 8091
+        - containerPort: 80
           name: nginx
       nodeSelector:
         kubernetes.io/hostname: k8ss4
@@ -65,4 +65,5 @@ spec:
       services:
         - name: disconf-svc
           port: 8091
+          targetPort: 80
           scheme: http
