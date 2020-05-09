@@ -1,17 +1,4 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: disconf-svc
-  labels:
-    app: disconf
-spec:
-  ports:
-  - port: 8091
-    name: server
-  clusterIP: None
-  selector:
-    app: nginx
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -46,3 +33,36 @@ spec:
           name: nginx
       nodeSelector:
         kubernetes.io/hostname: k8ss4
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: disconf-svc
+  labels:
+    app: disconf
+spec:
+  ports:
+    - port: 8091
+      name: server
+  clusterIP: None
+  selector:
+    app: nginx
+
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: disconf-ingressroute
+spec:
+  entryPoints:
+    - websecure
+    - web
+  routes:
+    - match: Host(`disconf.clvpg.com`)
+      kind: Rule
+      services:
+        - name: disconf-svc
+          port: 8091
+          scheme: http
