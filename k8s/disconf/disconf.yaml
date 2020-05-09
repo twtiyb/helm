@@ -32,13 +32,16 @@ spec:
       containers:
       - name: disconf
         imagePullPolicy: Always
-        image: harbor.clvpg.com/clv/disconf:latest
+        #image: harbor.clvpg.com/clv/disconf:latest
+        image: 192.168.6.11/clv/disconf:latest
         ports:
+        - containerPort: 8080
         - containerPort: 8080
           name: disconf
       - name: nginx
         imagePullPolicy: Always
-        image: harbor.clvpg.com/clv/disconf:latest
+        #image: harbor.clvpg.com/clv/disconf:latest
+        image: 192.168.6.11/clv/disconf_nginx:latest
         ports:
         - containerPort: 8091
           hostPort: 80
