@@ -47,7 +47,7 @@ spec:
       name: server
   clusterIP: None
   selector:
-    app: nginx
+    app: disconf
 
 
 ---
