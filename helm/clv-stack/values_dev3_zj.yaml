@@ -4,7 +4,7 @@ global:
     # 不启动pinpoint
     PINPOINT: 'true'
     PINPOINT_COL_IP: pinpoint-collector
-    LOGSTASH_ADDRESS: "\"elk-logstash.default.svc.cluster.local\""
+    LOGSTASH_ADDRESS: "\"elk-logstash.default.svc.cluster.local:5044\""
     # 连接的环境，普通的是以dev,cit,uat等来标识。也可以自己定义如t2，一般是特殊情况新建的环境。
     ENV: prod
     CONFIG_URL: disconf-svc.default.svc.cluster.local
