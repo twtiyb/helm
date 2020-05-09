@@ -46,3 +46,5 @@ spec:
         - containerPort: 8091
           hostPort: 80
           name: nginx
+      nodeSelector:
+        kubernetes.io/hostname: k8ss4
