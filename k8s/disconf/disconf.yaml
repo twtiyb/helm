@@ -45,6 +45,7 @@ spec:
   ports:
     - port: 8091
       name: server
+      targetPort: 80
   clusterIP: None
   selector:
     app: disconf
@@ -65,5 +66,4 @@ spec:
       services:
         - name: disconf-svc
           port: 8091
-          targetPort: 80
           scheme: http
