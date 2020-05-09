@@ -7,7 +7,7 @@ global:
     LOGSTASH_ADDRESS: "\"elk-logstash.default.svc.cluster.local\""
     # 连接的环境，普通的是以dev,cit,uat等来标识。也可以自己定义如t2，一般是特殊情况新建的环境。
     ENV: prod
-    CONFIG_URL: disconf-svc.default.svc.cluster.local:8091
+    CONFIG_URL: disconf-svc.default.svc.cluster.local
     spring_profiles_active: prod
     LIB_CLASSPATH: -Xbootclasspath/a:.
   root_domain: pg.clvpg.com
