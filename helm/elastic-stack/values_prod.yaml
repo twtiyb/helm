@@ -238,7 +238,7 @@ logstash:
             hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
             index => "%{index}"
             document_id => "%{modelUkid}"
-            template => "./sync/template/car_model.json"
+            template => "/usr/share/logstash/data/last_run/car_model.json"
             template_name => "car_model"
             template_overwrite => true
           }
@@ -251,7 +251,7 @@ logstash:
             hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
             index => "%{index}"
             document_id => "%{abstractObjectUkid}"
-            template => "./sync/template/im_abstract_object_template.json"
+            template => "/usr/share/logstash/data/last_run/im_abstract_object_template.json"
             template_name => "im_abstract_object"
             template_overwrite => true
           }
@@ -264,7 +264,7 @@ logstash:
             hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
             index => "%{index}"
             document_id => "%{definedUkid}"
-            template => "./sync/template/rs_defined_template.json"
+            template => "/usr/share/logstash/data/last_run/rs_defined_template.json"
             template_name => "rs_defined"
             template_overwrite => true
           }
