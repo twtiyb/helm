@@ -23,6 +23,78 @@ logstash:
   persistence:
     enabled: true
     storageClass: "local-storage"
+  inputs:
+    main: |-
+      input {
+        beats {
+          port => 5044
+        }
+      }
+    car_model_prod: |-
+      input {
+        jdbc {
+          jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+          jdbc_driver_class => "com.mysql.jdbc.Driver"
+          jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/datasync?useUnicode=true&characterEncoding=utf-8&useSSL=false"
+          jdbc_user => "datasync"
+          jdbc_password => "Dspass@2017"
+          jdbc_paging_enabled => true
+          jdbc_page_size => 100000
+          schedule => "* * * * *"
+          tracking_column => "update_time"
+          tracking_column_type => timestamp
+          lowercase_column_names => false
+          statement_filepath => "/usr/share/logstash/data/last_run/car_model.sql"
+          last_run_metadata_path => "/usr/share/logstash/data/last_run/car_model_prod_last_run"
+          add_field => {
+            index => "car_model_prod"
+          }
+        }
+      }
+    im_abstract_object_prod: |-
+      input {
+        jdbc {
+          jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+          jdbc_driver_class => "com.mysql.jdbc.Driver"
+          jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/resourcecenter?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false"
+          jdbc_user => "resourcecenter"
+          jdbc_password => "AQoOv63zRj"
+          jdbc_paging_enabled => true
+          jdbc_page_size => 100000
+          schedule => "* * * * *"
+          tracking_column => "update_time"
+          tracking_column_type => timestamp
+          lowercase_column_names => false
+          statement_filepath => "/usr/share/logstash/data/last_run/im_abstract_object.sql"
+          last_run_metadata_path => "/usr/share/logstash/data/last_run/im_abstract_object_prod_last_run"
+          add_field => {
+            index => "im_abstract_object_prod"
+          }
+        }
+      }
+    rs_defined_prod: |-
+      input {
+        jdbc {
+          jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+          jdbc_driver_class => "com.mysql.jdbc.Driver"
+          jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/resourcecenter?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false"
+          jdbc_user => "resourcecenter"
+          jdbc_password => "AQoOv63zRj"
+          jdbc_paging_enabled => true
+          jdbc_page_size => 100000
+          schedule => "* * * * *"
+          tracking_column => "update_time"
+          tracking_column_type => timestamp
+          lowercase_column_names => false
+          statement_filepath => "/usr/share/logstash/data/last_run/rs_defined.sql"
+          last_run_metadata_path => "/usr/share/logstash/data/last_run/rs_defined_uat_last_run"
+          add_field => {
+            index => "rs_defined_prod"
+          }
+        }
+      }
+
+
   filters:
     main: |-
       filter {
@@ -65,6 +137,82 @@ logstash:
           }
         }
       }
+    im_abstract_object_prod: |-
+      filter {
+        if [index] == "im_abstract_object_prod" {
+          jdbc_streaming {
+            jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+            jdbc_driver_class => "com.mysql.jdbc.Driver"
+            jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/resourcecenter?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false"
+            jdbc_user => "resourcecenter"
+      	  jdbc_validate_connection => true
+            jdbc_password => "AQoOv63zRj"
+            statement => "SELECT identify_relation_ukid identifyRelationUkid, identify_code identifyCode, identify_type identifyType FROM cm_identify_relation cir WHERE cir.relation_ukid = :relationUkid AND cir.relation_type = '1'"
+            parameters => { "relationUkid" => "abstractObjectUkid" }
+            target => "identifies"
+          }
+      	jdbc_streaming {
+            jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+            jdbc_driver_class => "com.mysql.jdbc.Driver"
+            jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/resourcecenter?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false"
+            jdbc_user => "resourcecenter"
+      	  jdbc_validate_connection => true
+            jdbc_password => "AQoOv63zRj"
+            statement => "SELECT attribute_relation_ukid attributeRelationUkid, attribute_ukid attributeUkid, attribute_value attributeValue, attribute_name attributeName, attribute_code attributeCode, attribute_type attributeType FROM cm_attribute_relation car WHERE car.relation_ukid = :relationUkid AND car.relation_type = 1 AND car.`attribute_code` = 'brand'"
+            parameters => { "relationUkid" => "abstractObjectUkid" }
+            target => "attributes"
+          }
+      	jdbc_streaming {
+            jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+            jdbc_driver_class => "com.mysql.jdbc.Driver"
+            jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/resourcecenter?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false"
+            jdbc_user => "resourcecenter"
+      	  jdbc_validate_connection => true
+            jdbc_password => "AQoOv63zRj"
+            statement => "SELECT queryAncestorCategoryChainUkids(cr.category_ukid) as ancestorCategoryChainUkids FROM cm_category_relation cr WHERE cr.`relation_type` = '1' AND cr.`relation_ukid` = :relationUkid"
+            parameters => { "relationUkid" => "abstractObjectUkid" }
+            target => "ancestorCategoryChainUkids"
+          }
+        }
+      }
+    rs_defined_prod: |-
+      filter {
+        if [index] == "rs_defined_prod" {
+          jdbc_streaming {
+            jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+            jdbc_driver_class => "com.mysql.jdbc.Driver"
+            jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/resourcecenter?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false"
+            jdbc_user => "resourcecenter"
+      	  jdbc_validate_connection => true
+            jdbc_password => "AQoOv63zRj"
+            statement => "SELECT identify_relation_ukid identifyRelationUkid, identify_code identifyCode, identify_type identifyType FROM cm_identify_relation cir WHERE cir.relation_ukid = :relationUkid AND cir.relation_type = 0"
+            parameters => { "relationUkid" => "definedUkid" }
+            target => "identifies"
+          }
+          jdbc_streaming {
+            jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+            jdbc_driver_class => "com.mysql.jdbc.Driver"
+            jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/resourcecenter?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false"
+            jdbc_user => "resourcecenter"
+      	    jdbc_validate_connection => true
+            jdbc_password => "AQoOv63zRj"
+            statement => "SELECT attribute_relation_ukid attributeRelationUkid, attribute_ukid attributeUkid, attribute_value attributeValue, attribute_name attributeName, attribute_code attributeCode, attribute_type attributeType FROM cm_attribute_relation car WHERE car.relation_ukid = :relationUkid AND car.relation_type = 0 AND car.`attribute_code` = 'brand'"
+            parameters => { "relationUkid" => "definedUkid" }
+            target => "attributes"
+          }
+          jdbc_streaming {
+            jdbc_driver_library => "/usr/share/logstash/data/mysql-connector-java-5.1.44.jar"
+            jdbc_driver_class => "com.mysql.jdbc.Driver"
+            jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/resourcecenter?useUnicode=true&autoReconnect=true&characterEncoding=utf-8&useSSL=false"
+            jdbc_user => "resourcecenter"
+      	  jdbc_validate_connection => true
+            jdbc_password => "AQoOv63zRj"
+            statement => "SELECT queryAncestorCategoryChainUkidsForResource(:relationUkid) as ancestorCategoryChainUkids"
+            parameters => { "relationUkid" => "definedUkid" }
+            target => "ancestorCategoryChainUkids"
+          }
+        }
+      }
   outputs:
     main: |-
       output {
@@ -83,7 +231,45 @@ logstash:
         }
         #stdout { codec => rubydebug }
       }
-
+    car_model_prod: |-
+      output {
+        if [index] == "car_model_prod" {
+          elasticsearch {
+            hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
+            index => "%{index}"
+            document_id => "%{modelUkid}"
+            template => "./sync/template/car_model.json"
+            template_name => "car_model"
+            template_overwrite => true
+          }
+        }
+      }
+    im_abstract_object_prod: |-
+      output {
+        if [index] == "im_abstract_object_prod" {
+          elasticsearch {
+            hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
+            index => "%{index}"
+            document_id => "%{abstractObjectUkid}"
+            template => "./sync/template/im_abstract_object_template.json"
+            template_name => "im_abstract_object"
+            template_overwrite => true
+          }
+        }
+      }
+    rs_defined_prod: |-
+      output {
+        if [index] == "rs_defined_prod" {
+          elasticsearch {
+            hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
+            index => "%{index}"
+            document_id => "%{definedUkid}"
+            template => "./sync/template/rs_defined_template.json"
+            template_name => "rs_defined"
+            template_overwrite => true
+          }
+        }
+      }
 filebeat:
   enabled: false
   # config:
