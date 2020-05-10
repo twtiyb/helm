@@ -37,7 +37,7 @@ logstash:
           jdbc_driver_class => "com.mysql.jdbc.Driver"
           jdbc_connection_string => "jdbc:mysql://192.168.202.46:3306/datasync?useUnicode=true&characterEncoding=utf-8&useSSL=false"
           jdbc_user => "datasync"
-          jdbc_password => "Dspass@2017"
+          jdbc_password => "AQoOv63zRj"
           jdbc_paging_enabled => true
           jdbc_page_size => 100000
           schedule => "* * * * *"
