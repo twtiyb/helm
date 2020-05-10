@@ -11,6 +11,10 @@ elasticsearch:
     persistence:
       storageClass: "local-storage"
       size: 50Gi
+  cluster:
+    plugins:
+      - ik
+      - pinyin
 kibana:
   enabled: true
   env:
