@@ -11,10 +11,10 @@ elasticsearch:
     persistence:
       storageClass: "local-storage"
       size: 50Gi
-  cluster:
-    plugins:
-      - https://clv-chengdu.oss-cn-chengdu.aliyuncs.com/elasticsearch-analysis-ik-6.8.8.zip
-      - https://clv-chengdu.oss-cn-chengdu.aliyuncs.com/elasticsearch-analysis-pinyin-6.8.8.zip
+#  cluster:
+#    plugins:
+#      - https://clv-chengdu.oss-cn-chengdu.aliyuncs.com/elasticsearch-analysis-ik-6.8.8.zip
+#      - https://clv-chengdu.oss-cn-chengdu.aliyuncs.com/elasticsearch-analysis-pinyin-6.8.8.zip
   client:
     nodeSelector:
       kubernetes.io/hostname: k8ss4
