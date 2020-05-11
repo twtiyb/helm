@@ -13,8 +13,8 @@ elasticsearch:
       size: 50Gi
   cluster:
     plugins:
-      - ik
-      - pinyin
+      - https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.8.8/elasticsearch-analysis-ik-6.8.8.zip
+      - https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v6.8.8/elasticsearch-analysis-pinyin-6.8.8.zip
   client:
     nodeSelector:
       kubernetes.io/hostname: k8ss4
