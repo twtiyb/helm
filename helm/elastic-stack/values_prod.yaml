@@ -15,6 +15,9 @@ elasticsearch:
     plugins:
       - ik
       - pinyin
+  client:
+    nodeSelector:
+      kubernetes.io/hostname: k8ss4
 kibana:
   enabled: true
   env:
