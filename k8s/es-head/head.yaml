@@ -1,0 +1,62 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eshead
+  labels:
+    app: eshead
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eshead
+  template:
+    metadata:
+      labels:
+        app: eshead
+    spec:
+      containers:
+      - name: eshead
+        imagePullPolicy: Always
+        #image: harbor.clvpg.com/clv/disconf:latest
+        image: jeanberu/elasticsearch-head-standalone
+        ports:
+        - containerPort: 9100
+          name: eshead
+      nodeSelector:
+        kubernetes.io/hostname: k8ss4
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshead-svc
+  labels:
+    app: eshead
+spec:
+  ports:
+    - port: 9100
+      name: server
+      targetPort: 9100
+  clusterIP: None
+  selector:
+    app: eshead
+
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: eshead-ingressroute
+spec:
+  entryPoints:
+    - websecure
+    - web
+  routes:
+    - match: Host(`eshead.clvpg.com`)
+      kind: Rule
+      services:
+        - name: eshead-svc
+          port: 9100
+          scheme: http

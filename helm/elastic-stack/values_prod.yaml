@@ -12,6 +12,9 @@ elasticsearch:
       storageClass: "local-storage"
       size: 50Gi
   cluster:
+    config:
+      http.cors.enabled: true
+      http.cors.allow-origin: "*"
     plugins:
       - https://clv-chengdu.oss-cn-chengdu.aliyuncs.com/elasticsearch-analysis-ik-6.8.2.zip
       - https://clv-chengdu.oss-cn-chengdu.aliyuncs.com/elasticsearch-analysis-pinyin-6.8.2.zip
@@ -94,7 +97,7 @@ logstash:
           tracking_column_type => timestamp
           lowercase_column_names => false
           statement_filepath => "/usr/share/logstash/data/last_run/rs_defined.sql"
-          last_run_metadata_path => "/usr/share/logstash/data/last_run/rs_defined_uat_last_run"
+          last_run_metadata_path => "/usr/share/logstash/data/last_run/rs_defined_prod_last_run"
           add_field => {
             index => "rs_defined_prod"
           }
