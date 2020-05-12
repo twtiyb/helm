@@ -1,0 +1,63 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dubboadmin
+  labels:
+    app: dubboadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dubboadmin
+  template:
+    metadata:
+      labels:
+        app: dubboadmin
+    spec:
+      containers:
+      - name: dubboadmin
+        imagePullPolicy: Always
+        #image: harbor.clvpg.com/clv/disconf:latest
+        image: changwentao/dubboadmin
+        ports:
+        - containerPort: 8080
+          name: dubboadmin
+      nodeSelector:
+        kubernetes.io/hostname: k8ss4
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dubboadmin-svc
+  labels:
+    app: dubboadmin
+spec:
+  ports:
+    - port: 8080
+      name: server
+      targetPort: 8080
+  clusterIP: None
+  selector:
+    app: dubboadmin
+
+
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: esclient-ingressroute
+spec:
+  entryPoints:
+    - websecure
+    - web
+  routes:
+    - match: Host(`dubboadmin.clvpg.com`)
+      kind: Rule
+      services:
+        - name: dubboadmin-svc
+          port: 8080
+          scheme: http
