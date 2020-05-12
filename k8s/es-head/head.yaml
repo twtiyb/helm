@@ -60,3 +60,20 @@ spec:
         - name: eshead-svc
           port: 9100
           scheme: http
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: esclient-ingressroute
+spec:
+  entryPoints:
+    - websecure
+    - web
+  routes:
+    - match: Host(`esclient.clvpg.com`)
+      kind: Rule
+      services:
+        - name: elk-elasticsearch-client
+          port: 9200
+          scheme: http
