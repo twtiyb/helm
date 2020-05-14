@@ -53,7 +53,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: emqx-ingressroute
+  name: emqx-dashboard-ingressroute
 spec:
   entryPoints:
     - websecure
@@ -63,5 +63,21 @@ spec:
       kind: Rule
       services:
         - name: emqx-svc
-          port: 8080
+          port: 18083
+          scheme: http
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: emqx-dashboard-ingressroute
+spec:
+  entryPoints:
+    - emqx
+  routes:
+    - match: Host(`*`)
+      kind: Rule
+      services:
+        - name: emqx-svc
+          port: 1883
           scheme: http
