@@ -1,0 +1,62 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iot
+  labels:
+    app: iot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iot
+  template:
+    metadata:
+      labels:
+        app: iot
+    spec:
+      containers:
+      - name: iot
+        imagePullPolicy: Always
+        image: hbaor.clvpg.com/clv/iot-nano:pro_0.9.3
+        ports:
+        - containerPort: 8080
+          name: iot
+      nodeSelector:
+        kubernetes.io/hostname: k8ss4
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: iot-svc
+  labels:
+    app: iot
+spec:
+  ports:
+    - port: 8080
+      name: server
+      targetPort: 8080
+  clusterIP: None
+  selector:
+    app: iot
+
+
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: iot-ingressroute
+spec:
+  entryPoints:
+    - websecure
+    - web
+  routes:
+    - match: Host(`iot.clvpg.com`)
+      kind: Rule
+      services:
+        - name: iot-svc
+          port: 8080
+          scheme: http
