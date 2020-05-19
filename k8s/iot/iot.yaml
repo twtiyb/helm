@@ -23,6 +23,11 @@ spec:
         ports:
         - containerPort: 8080
           name: iot
+        env:
+          - name: MachineId
+            value: 1
+          - name: domain
+            value: http://iot.sanyangma.com
       nodeSelector:
         kubernetes.io/hostname: k8ss4
 
