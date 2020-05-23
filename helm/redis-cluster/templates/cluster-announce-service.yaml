@@ -19,6 +19,7 @@ metadata:
 spec:
   publishNotReadyAddresses: true
   type: ClusterIP
+  clusterIP: None
   ports:
   - name: server
     port: {{ $root.Values.redis.port }}
